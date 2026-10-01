@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import ContactCTA from "@/components/ContactCTA";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { tokens } from "@/lib/tokens";
 
 export const metadata: Metadata = {
@@ -163,9 +163,6 @@ export default function TratamientosPage() {
       {/* 2. Intro Section */}
       <section className="bg-white py-16 lg:py-20 border-b border-zinc-200/80">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#235055] bg-[#EBF3F4] px-3.5 py-1.5 rounded-full inline-block mb-4">
-            Especialidades Médicas
-          </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-950">
             TRATAMIENTOS Y SERVICIOS
           </h2>
@@ -173,7 +170,7 @@ export default function TratamientosPage() {
             Todo lo que ofrecemos para tu salud bucal
           </p>
           <p className="mt-3 text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">
-            Cada tratamiento está diseñado para brindarte comodidad, confianza y bienestar con el respaldo de tecnología avanzada y atención personalizada.
+            Cada tratamiento está diseñado para brindarte comodidad, confianza y bienestar
           </p>
         </div>
       </section>
@@ -194,15 +191,6 @@ export default function TratamientosPage() {
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                   {/* Text Column */}
                   <div className={isEven ? "lg:order-1" : "lg:order-2"}>
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className="text-xs font-bold text-[#235055] bg-[#EBF3F4] border border-[#C8DFE2] px-3 py-1 rounded-full">
-                        {treatment.number}
-                      </span>
-                      <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider">
-                        Especialidad Odontológica
-                      </span>
-                    </div>
-
                     <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-950 mb-4">
                       {treatment.title}
                     </h3>
