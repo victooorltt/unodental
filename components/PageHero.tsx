@@ -54,7 +54,7 @@ export function PageHero({
         className
       )}
     >
-      {/* Full-width background photo across the entire hero (no containers) */}
+      {/* Full-width background photo across the entire hero — no containers */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <img
           src={imageSrc}
@@ -64,19 +64,19 @@ export function PageHero({
           loading="eager"
         />
 
-        {/* Overlay de opacidad según la página */}
+        {/* Overlay de opacidad garantizado mediante color RGBA directo */}
         {overlayOpacity === "none" ? null : overlayOpacity === "high" ? (
-          // Opacidad evidente intermedia para Nosotros (garantiza lectura sin tapar la foto)
-          <>
-            <div className="absolute inset-0 bg-white/78" />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/84 via-white/76 to-white/82" />
-          </>
+          // Opacidad evidente intermedia para Nosotros (80% blanco: lectura perfecta y foto visible)
+          <div
+            className="absolute inset-0"
+            style={{ backgroundColor: "rgba(255, 255, 255, 0.80)" }}
+          />
         ) : (
-          // Opacidad intermedia para Inicio y Contacto
-          <>
-            <div className="absolute inset-0 bg-white/72" />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/68 to-white/76" />
-          </>
+          // Opacidad estándar para Inicio y Contacto (70% blanco)
+          <div
+            className="absolute inset-0"
+            style={{ backgroundColor: "rgba(255, 255, 255, 0.70)" }}
+          />
         )}
       </div>
 
