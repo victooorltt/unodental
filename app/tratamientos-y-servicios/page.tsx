@@ -139,8 +139,8 @@ export default function TratamientosPage() {
       <PageHero
         title={
           <>
-            Cuidado experto para{" "}
-            <span className="text-[#235055]">tu salud dental</span>
+            Cuidado experto<br />
+            <span className="text-[#235055]">para tu salud dental</span>
           </>
         }
         subtitle="Disfruta de la última tecnología dental en manos de odontólogos expertos"

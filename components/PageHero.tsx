@@ -19,7 +19,7 @@ export interface PageHeroProps {
   };
   showCredentials?: boolean;
   align?: "center" | "left";
-  overlayOpacity?: "default" | "high" | "none";
+  overlayOpacity?: "default" | "high" | "none" | number;
   minHeight?: string;
   imagePosition?: string;
   children?: React.ReactNode;
@@ -45,6 +45,19 @@ export function PageHero({
   const heroDescription = subtitle || description;
   const isLeft = align === "left";
 
+  // Determinar la opacidad del overlay blanco:
+  // - "high" (Nosotros): 0.70 para que la foto del equipo se aprecie más pero el texto siga nítido
+  // - "default" (Inicio y Contacto): 0.58 para que la foto se vea un poco más (un poco solo)
+  // - "none" (Tratamientos): sin overlay (la foto queda al 100% natural)
+  let overlayColor: string | null = null;
+  if (typeof overlayOpacity === "number") {
+    overlayColor = `rgba(255, 255, 255, ${overlayOpacity})`;
+  } else if (overlayOpacity === "high") {
+    overlayColor = "rgba(255, 255, 255, 0.70)";
+  } else if (overlayOpacity === "default") {
+    overlayColor = "rgba(255, 255, 255, 0.58)";
+  }
+
   return (
     <section
       className={cn(
@@ -64,18 +77,11 @@ export function PageHero({
           loading="eager"
         />
 
-        {/* Overlay de opacidad garantizado mediante color RGBA directo */}
-        {overlayOpacity === "none" ? null : overlayOpacity === "high" ? (
-          // Opacidad evidente intermedia para Nosotros (80% blanco: lectura perfecta y foto visible)
+        {/* Overlay de opacidad según los ajustes solicitados */}
+        {overlayColor && (
           <div
             className="absolute inset-0"
-            style={{ backgroundColor: "rgba(255, 255, 255, 0.80)" }}
-          />
-        ) : (
-          // Opacidad estándar para Inicio y Contacto (70% blanco)
-          <div
-            className="absolute inset-0"
-            style={{ backgroundColor: "rgba(255, 255, 255, 0.70)" }}
+            style={{ backgroundColor: overlayColor }}
           />
         )}
       </div>
