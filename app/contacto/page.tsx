@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Button from "@/components/Button";
 import PageHero from "@/components/PageHero";
 import { tokens } from "@/lib/tokens";
-import { Phone, Mail, MapPin, Clock, CheckCircle2 } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, CheckCircle2, ArrowRight } from "lucide-react";
 
 const treatmentOptions = [
   "Implantología",
@@ -36,7 +36,6 @@ export default function ContactoPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulación de envío con confirmación de estado
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -57,37 +56,48 @@ export default function ContactoPage() {
 
   return (
     <div className="bg-white">
-      {/* Hero compacto con imagen de las instalaciones */}
+      {/* 1. Hero: Full Photographic Background */}
       <PageHero
-        title="Contacto"
-        description="Pide tu cita o consúltanos cualquier duda"
+        title={
+          <>
+            Contacto: <span className="text-[#235055]">Uno Dental</span>
+          </>
+        }
+        subtitle="Pide tu cita o consúltanos cualquier duda sobre tu salud bucodental"
         imageSrc="/images/consulta-clinica.webp"
-        imageAlt="Instalaciones Uno Dental"
-        className="border-b border-line [&>div]:py-10 lg:[&>div]:py-14"
+        imageAlt="Instalaciones de la Clínica Uno Dental en Valladolid"
+        imagePosition="object-[center_40%]"
+        primaryCta={{
+          label: "LLAMAR AHORA",
+          href: `tel:${tokens.contact.phoneTel}`,
+        }}
+        secondaryCta={{
+          label: "ENVIAR EMAIL",
+          href: `mailto:${tokens.contact.email}`,
+        }}
+        showCredentials={true}
       />
 
-      {/* Sección principal de 2 columnas */}
-      <div className="py-12 sm:py-16 lg:py-20">
+      {/* 2. Sección principal de 2 columnas */}
+      <div className="bg-[#F8FAFA] py-16 lg:py-24 border-b border-zinc-200/80">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Columna 1: Formulario de contacto */}
             <div className="lg:col-span-7">
               {isSubmitted ? (
-                <div className="bg-surface rounded-2xl border border-line p-8 sm:p-12 text-center">
-                  <div className="w-14 h-14 mx-auto rounded-full bg-accent/20 flex items-center justify-center text-zinc-900 mb-6">
-                    <CheckCircle2 className="w-8 h-8 text-zinc-900" />
+                <div className="bg-white rounded-2xl border border-[#C8DFE2] p-8 sm:p-12 text-center shadow-md">
+                  <div className="w-16 h-16 mx-auto rounded-full bg-[#EBF3F4] border border-[#C8DFE2] flex items-center justify-center text-[#235055] mb-6">
+                    <CheckCircle2 className="w-9 h-9 text-[#235055]" />
                   </div>
-                  <h2 className="text-2xl font-bold text-zinc-950 tracking-tight">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-zinc-950 tracking-tight">
                     ¡Gracias por contactar con nosotros!
                   </h2>
-                  <p className="mt-3 text-base text-zinc-600 leading-relaxed max-w-md mx-auto">
-                    Hemos recibido tu consulta correctamente. Nos pondremos en
-                    contacto contigo a la mayor brevedad posible para confirmar tu
-                    cita o resolver cualquier duda.
+                  <p className="mt-4 text-base text-zinc-600 leading-relaxed max-w-md mx-auto">
+                    Hemos recibido tu mensaje correctamente. Nuestro equipo se pondrá en contacto contigo a la mayor brevedad para confirmar tu cita.
                   </p>
                   <div className="mt-8">
                     <Button
-                      variant="outline"
+                      variant="primary"
                       size="md"
                       onClick={handleReset}
                     >
@@ -96,13 +106,15 @@ export default function ContactoPage() {
                   </div>
                 </div>
               ) : (
-                <div className="bg-white rounded-2xl border border-line p-6 sm:p-8 shadow-sm">
-                  <h2 className="text-xl sm:text-2xl font-bold text-zinc-950 tracking-tight mb-2">
+                <div className="bg-white rounded-2xl border border-zinc-200/90 p-8 sm:p-10 shadow-sm">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#235055] bg-[#EBF3F4] px-3 py-1 rounded-full inline-block mb-3">
+                    Cita Previa
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-zinc-950 tracking-tight mb-2">
                     Formulario de contacto
                   </h2>
                   <p className="text-sm text-zinc-600 mb-8">
-                    Rellena este formulario y nos pondremos en contacto contigo para
-                    gestionar tu cita.
+                    Rellena este formulario y te responderemos para agendar tu consulta sin compromiso.
                   </p>
 
                   <form onSubmit={handleSubmit} className="space-y-5">
@@ -123,7 +135,7 @@ export default function ContactoPage() {
                           setFormData({ ...formData, nombre: e.target.value })
                         }
                         placeholder="Nombre y apellidos"
-                        className="w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+                        className="w-full rounded-xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#A4C4C8] focus:bg-white focus:border-transparent transition-all"
                       />
                     </div>
 
@@ -145,7 +157,7 @@ export default function ContactoPage() {
                             setFormData({ ...formData, email: e.target.value })
                           }
                           placeholder="tu@email.com"
-                          className="w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+                          className="w-full rounded-xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#A4C4C8] focus:bg-white focus:border-transparent transition-all"
                         />
                       </div>
 
@@ -168,7 +180,7 @@ export default function ContactoPage() {
                             })
                           }
                           placeholder="Ej. 983 20 07 71"
-                          className="w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
+                          className="w-full rounded-xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#A4C4C8] focus:bg-white focus:border-transparent transition-all"
                         />
                       </div>
                     </div>
@@ -192,7 +204,7 @@ export default function ContactoPage() {
                               tratamiento: e.target.value,
                             })
                           }
-                          className="w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all appearance-none cursor-pointer"
+                          className="w-full rounded-xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-[#A4C4C8] focus:bg-white focus:border-transparent transition-all appearance-none cursor-pointer"
                         >
                           <option value="" disabled>
                             Selecciona una opción...
@@ -229,8 +241,8 @@ export default function ContactoPage() {
                         onChange={(e) =>
                           setFormData({ ...formData, mensaje: e.target.value })
                         }
-                        placeholder="Cuéntanos brevemente tu caso o consulta..."
-                        className="w-full rounded-xl border border-line bg-surface px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all resize-y min-h-[110px]"
+                        placeholder="Cuéntanos brevemente tu caso o preferencia de horario..."
+                        className="w-full rounded-xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#A4C4C8] focus:bg-white focus:border-transparent transition-all resize-y min-h-[110px]"
                       />
                     </div>
 
@@ -247,28 +259,27 @@ export default function ContactoPage() {
                             privacidad: e.target.checked,
                           })
                         }
-                        className="mt-1 h-4 w-4 rounded border-line text-zinc-950 focus:ring-accent accent-[#6F979C] cursor-pointer"
+                        className="mt-1 h-4 w-4 rounded border-zinc-300 text-zinc-950 focus:ring-[#A4C4C8] accent-[#235055] cursor-pointer"
                       />
                       <label
                         htmlFor="privacidad"
                         className="text-xs text-zinc-600 leading-relaxed cursor-pointer select-none"
                       >
                         Acepto la política de privacidad y el tratamiento de mis
-                        datos para la gestión de mi consulta. *
+                        datos para la gestión de mi cita previa. *
                       </label>
                     </div>
 
                     {/* Botón de envío */}
                     <div className="pt-2">
-                      <Button
+                      <button
                         type="submit"
-                        variant="primary"
-                        size="lg"
                         disabled={isSubmitting}
-                        className="w-full justify-center"
+                        className="w-full inline-flex items-center justify-center gap-2 bg-[#1E3639] hover:bg-[#152729] text-white font-semibold px-8 py-3.5 text-base rounded-xl shadow-sm transition-all hover:shadow-md cursor-pointer disabled:opacity-50"
                       >
-                        {isSubmitting ? "Enviando mensaje..." : "Enviar mensaje"}
-                      </Button>
+                        <span>{isSubmitting ? "Enviando mensaje..." : "Enviar mensaje"}</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -278,15 +289,18 @@ export default function ContactoPage() {
             {/* Columna 2: Datos de contacto & Mapa */}
             <div className="lg:col-span-5 space-y-8">
               {/* Tarjeta de datos de contacto */}
-              <div className="bg-surface rounded-2xl border border-line p-6 sm:p-8 space-y-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-zinc-950 tracking-tight">
+              <div className="bg-white rounded-2xl border border-zinc-200/90 p-8 shadow-sm space-y-6">
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#235055] bg-[#EBF3F4] px-3 py-1 rounded-full inline-block">
+                  Atención Directa
+                </span>
+                <h2 className="text-2xl font-bold text-zinc-950 tracking-tight">
                   Atención en clínica
                 </h2>
 
                 <div className="space-y-5">
                   {/* Teléfono */}
                   <div className="flex items-start gap-4">
-                    <div className="p-2.5 rounded-xl bg-white border border-line text-zinc-700 shrink-0">
+                    <div className="w-11 h-11 rounded-xl bg-[#EBF3F4] border border-[#C8DFE2] flex items-center justify-center text-[#235055] shrink-0 mt-0.5">
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
@@ -295,7 +309,7 @@ export default function ContactoPage() {
                       </p>
                       <a
                         href={`tel:${tokens.contact.phoneTel}`}
-                        className="text-base font-medium text-zinc-900 hover:text-zinc-700 underline underline-offset-4 transition-colors"
+                        className="text-lg font-bold text-zinc-900 hover:text-[#235055] transition-colors"
                       >
                         {tokens.contact.phone}
                       </a>
@@ -304,7 +318,7 @@ export default function ContactoPage() {
 
                   {/* Correo */}
                   <div className="flex items-start gap-4">
-                    <div className="p-2.5 rounded-xl bg-white border border-line text-zinc-700 shrink-0">
+                    <div className="w-11 h-11 rounded-xl bg-[#EBF3F4] border border-[#C8DFE2] flex items-center justify-center text-[#235055] shrink-0 mt-0.5">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
@@ -313,7 +327,7 @@ export default function ContactoPage() {
                       </p>
                       <a
                         href={`mailto:${tokens.contact.email}`}
-                        className="text-base font-medium text-zinc-900 hover:text-zinc-700 underline underline-offset-4 transition-colors break-all"
+                        className="text-sm font-semibold text-zinc-900 hover:text-[#235055] transition-colors break-all uppercase"
                       >
                         {tokens.contact.email}
                       </a>
@@ -322,22 +336,22 @@ export default function ContactoPage() {
 
                   {/* Dirección */}
                   <div className="flex items-start gap-4">
-                    <div className="p-2.5 rounded-xl bg-white border border-line text-zinc-700 shrink-0">
+                    <div className="w-11 h-11 rounded-xl bg-[#EBF3F4] border border-[#C8DFE2] flex items-center justify-center text-[#235055] shrink-0 mt-0.5">
                       <MapPin className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
                         Dirección
                       </p>
-                      <p className="text-base font-medium text-zinc-900">
+                      <p className="text-sm font-semibold text-zinc-900">
                         {tokens.contact.address}
                       </p>
                     </div>
                   </div>
 
                   {/* Horario */}
-                  <div className="flex items-start gap-4 pt-3 border-t border-line">
-                    <div className="p-2.5 rounded-xl bg-white border border-line text-zinc-700 shrink-0">
+                  <div className="flex items-start gap-4 pt-4 border-t border-zinc-100">
+                    <div className="w-11 h-11 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-700 shrink-0 mt-0.5">
                       <Clock className="w-5 h-5" />
                     </div>
                     <div className="space-y-1 text-sm">
@@ -345,18 +359,18 @@ export default function ContactoPage() {
                         Horario de consulta
                       </p>
                       <div className="text-zinc-700">
-                        <span className="font-medium text-zinc-900">
+                        <span className="font-semibold text-zinc-900">
                           Lunes a Jueves:
                         </span>{" "}
                         9:30 – 13:30 h | 16:00 – 20:00 h
                       </div>
                       <div className="text-zinc-700">
-                        <span className="font-medium text-zinc-900">
+                        <span className="font-semibold text-zinc-900">
                           Viernes:
                         </span>{" "}
                         9:30 – 14:00 h
                       </div>
-                      <div className="text-xs text-zinc-500 pt-1">
+                      <div className="text-xs text-zinc-400 pt-1">
                         Sábados y Domingos: Cerrado
                       </div>
                     </div>
@@ -365,16 +379,19 @@ export default function ContactoPage() {
               </div>
 
               {/* Mapa embebido */}
-              <div>
-                <div className="mb-3">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-900">
+              <div className="bg-white rounded-2xl border border-zinc-200/90 p-6 shadow-sm">
+                <div className="mb-4">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#235055] bg-[#EBF3F4] px-3 py-1 rounded-full inline-block mb-2">
                     Ubicación
+                  </span>
+                  <h3 className="text-lg font-bold text-zinc-900">
+                    Dónde encontrarnos
                   </h3>
-                  <p className="text-xs text-zinc-500 mt-0.5">
+                  <p className="text-xs text-zinc-500 mt-1">
                     {tokens.contact.address}
                   </p>
                 </div>
-                <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden border border-line bg-zinc-100 shadow-sm">
+                <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-inner">
                   <iframe
                     src="https://maps.google.com/maps?q=Calle+L%C3%B3pez+G%C3%B3mez+14,+47002+Valladolid,+Spain&t=&z=16&ie=UTF8&iwloc=&output=embed"
                     title="Ubicación de Clínica Uno Dental en Valladolid"

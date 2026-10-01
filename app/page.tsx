@@ -1,11 +1,20 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import ContactCTA from "@/components/ContactCTA";
 import Button from "@/components/Button";
 import { tokens } from "@/lib/tokens";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ArrowRight,
+  Sparkles,
+  ShieldCheck,
+  HeartHandshake,
+} from "lucide-react";
 
 interface TreatmentItem {
   title: string;
@@ -131,13 +140,19 @@ export default function HomePage() {
   };
 
   return (
-    <>
-      {/* Block 1: Hero */}
+    <div>
+      {/* 1. Hero: Full-Screen Background Photo with centered content, credentials & subtle overlay */}
       <PageHero
-        title="Desde 2010 en boca de todos"
-        description="Disfruta de la última tecnología dental en manos de odontólogos expertos"
+        title={
+          <>
+            Desde 2010{" "}
+            <span className="text-[#235055]">en boca de todos</span>
+          </>
+        }
+        subtitle="Disfruta de la última tecnología dental en manos de odontólogos expertos"
         imageSrc="/images/hero-inicio.webp"
-        imageAlt="Clínica Uno Dental Valladolid"
+        imageAlt="Clínica Uno Dental en Valladolid"
+        imagePosition="object-[center_30%]"
         primaryCta={{
           label: "PIDE CITA",
           href: "/contacto",
@@ -146,18 +161,22 @@ export default function HomePage() {
           label: "CONTACTA",
           href: `tel:${tokens.contact.phoneTel}`,
         }}
+        showCredentials={true}
       />
 
-      {/* Block 2: Carrusel de tratamientos y servicios */}
-      <section className="bg-surface border-t border-line py-16 lg:py-24">
+      {/* 2. Carrusel de tratamientos y servicios */}
+      <section className="bg-white py-16 lg:py-24">
         <div className="max-w-6xl mx-auto px-6">
           {/* Header with Title, Subtitle, Description and Carousel Navigation */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div className="max-w-2xl">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#235055] bg-[#EBF3F4] px-3 py-1 rounded-full inline-block mb-3">
+                Especialidades
+              </span>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
                 Tratamientos y Servicios
               </h2>
-              <p className="mt-3 text-lg font-semibold text-zinc-800">
+              <p className="mt-2 text-lg font-semibold text-zinc-800">
                 Todo lo que ofrecemos para tu salud bucal
               </p>
               <p className="mt-2 text-base text-zinc-600">
@@ -171,7 +190,7 @@ export default function HomePage() {
                 onClick={prev}
                 disabled={currentIndex === 0}
                 aria-label="Ver tratamientos anteriores"
-                className="w-10 h-10 rounded-full border border-line bg-white flex items-center justify-center text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                className="w-11 h-11 rounded-full border border-zinc-200 bg-white flex items-center justify-center text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50 hover:border-zinc-300 disabled:opacity-30 disabled:pointer-events-none transition-all shadow-xs"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -180,7 +199,7 @@ export default function HomePage() {
                 onClick={next}
                 disabled={currentIndex >= maxIndex}
                 aria-label="Ver siguientes tratamientos"
-                className="w-10 h-10 rounded-full border border-line bg-white flex items-center justify-center text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                className="w-11 h-11 rounded-full border border-zinc-200 bg-white flex items-center justify-center text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50 hover:border-zinc-300 disabled:opacity-30 disabled:pointer-events-none transition-all shadow-xs"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -204,24 +223,33 @@ export default function HomePage() {
                   key={treatment.title}
                   className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-3"
                 >
-                  <div className="bg-white rounded-2xl border border-line overflow-hidden flex flex-col h-full shadow-sm hover:border-zinc-300 transition-colors">
-                    <div className="aspect-[16/10] overflow-hidden bg-zinc-100">
+                  <Link
+                    href="/tratamientos-y-servicios"
+                    className="group flex flex-col h-full bg-white rounded-2xl border border-zinc-200/90 overflow-hidden shadow-xs hover:border-[#A4C4C8] hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100">
                       <img
                         src={treatment.image}
                         alt={treatment.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                       />
                     </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <h3 className="text-base font-bold tracking-tight text-zinc-950 uppercase">
-                        {treatment.title}
-                      </h3>
-                      <p className="mt-2 text-sm text-zinc-600 leading-relaxed flex-1">
-                        {treatment.description}
-                      </p>
+                    <div className="p-6 flex flex-col flex-1 justify-between">
+                      <div>
+                        <h3 className="text-base font-bold tracking-tight text-zinc-950 uppercase group-hover:text-[#235055] transition-colors">
+                          {treatment.title}
+                        </h3>
+                        <p className="mt-2 text-sm text-zinc-600 leading-relaxed">
+                          {treatment.description}
+                        </p>
+                      </div>
+                      <div className="mt-5 pt-4 border-t border-zinc-100 flex items-center gap-1.5 text-xs font-semibold text-[#235055]">
+                        <span>Ver tratamiento</span>
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -238,7 +266,7 @@ export default function HomePage() {
                 className={cn(
                   "h-2 rounded-full transition-all duration-300",
                   activePageIndex === index
-                    ? "w-8 bg-zinc-900"
+                    ? "w-8 bg-[#1E3639]"
                     : "w-2 bg-zinc-300 hover:bg-zinc-400"
                 )}
               />
@@ -247,37 +275,60 @@ export default function HomePage() {
 
           {/* Action button below carousel */}
           <div className="mt-10 text-center">
-            <Button
+            <Link
               href="/tratamientos-y-servicios"
-              variant="secondary"
-              size="lg"
+              className="inline-flex items-center justify-center gap-2 bg-zinc-950 hover:bg-zinc-800 text-white font-semibold px-8 py-3.5 text-base rounded-xl shadow-sm transition-all hover:shadow-md"
             >
-              VER MÁS
-            </Button>
+              <span>VER MÁS</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Block 3: El Equipo */}
-      <section className="bg-white border-t border-line py-16 lg:py-24">
+      {/* 3. El Equipo — Somos UNO DENTAL (Soft Tinted Section) */}
+      <section className="bg-[#F0F6F7] border-y border-[#D6E6E8] py-16 lg:py-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
             <div className="flex flex-col justify-center">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#235055] bg-white border border-[#D6E6E8] px-3 py-1 rounded-full inline-block w-fit mb-4">
+                El Equipo
+              </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-950 leading-[1.15]">
                 Somos UNO DENTAL
               </h2>
-              <p className="mt-4 sm:mt-6 text-base sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
+              <p className="mt-4 sm:mt-6 text-base sm:text-lg text-zinc-700 leading-relaxed max-w-xl">
                 Experiencia y atención humana para que te sientas en las mejores manos
               </p>
+
+              <div className="mt-6 space-y-3 text-sm text-zinc-700">
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-full bg-white border border-[#D6E6E8] flex items-center justify-center shrink-0">
+                    <Sparkles className="w-4 h-4 text-[#235055]" />
+                  </div>
+                  <span>16 años de trayectoria profesional en Valladolid</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-full bg-white border border-[#D6E6E8] flex items-center justify-center shrink-0">
+                    <HeartHandshake className="w-4 h-4 text-[#235055]" />
+                  </div>
+                  <span>Trato cercano y personalizado en cada consulta</span>
+                </div>
+              </div>
+
               <div className="mt-8">
-                <Button href="/el-equipo" variant="primary" size="lg">
-                  CONÓCENOS
-                </Button>
+                <Link
+                  href="/el-equipo"
+                  className="inline-flex items-center justify-center gap-2 bg-[#1E3639] hover:bg-[#152729] text-white font-semibold px-8 py-3.5 text-base rounded-xl shadow-sm transition-all hover:shadow-md cursor-pointer"
+                >
+                  <span>CONÓCENOS</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
 
             <div className="w-full">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-zinc-100 border border-line">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white border border-white/60 shadow-xl">
                 <img
                   src="/images/el-equipo.webp"
                   alt="Equipo de profesionales Uno Dental"
@@ -290,12 +341,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Block 4: La Clínica */}
-      <section className="bg-surface border-t border-line py-16 lg:py-24">
+      {/* 4. La Clínica — Tu bienestar empieza desde que entras (Deep Petrol Contrast Section) */}
+      <section className="bg-[#1E3639] text-white py-16 lg:py-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
             <div className="order-2 lg:order-1 w-full">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-zinc-100 border border-line">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white/10 border border-white/20 shadow-2xl">
                 <img
                   src="/images/consulta-clinica.webp"
                   alt="Instalaciones Uno Dental"
@@ -306,49 +357,47 @@ export default function HomePage() {
             </div>
 
             <div className="order-1 lg:order-2 flex flex-col justify-center">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-950 leading-[1.15]">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#A4C4C8] bg-white/10 border border-white/20 px-3 py-1 rounded-full inline-block w-fit mb-4">
+                La Clínica
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
                 Tu bienestar empieza desde que entras
               </h2>
-              <p className="mt-4 sm:mt-6 text-base sm:text-lg text-zinc-600 leading-relaxed max-w-xl">
+              <p className="mt-4 sm:mt-6 text-base sm:text-lg text-emerald-50/90 leading-relaxed max-w-xl">
                 Un ambiente tranquilo y cuidado al detalle para que tu visita sea lo más agradable posible
               </p>
+
+              <div className="mt-6 space-y-3 text-sm text-emerald-50/90">
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-full bg-white/15 border border-white/20 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-4 h-4 text-[#A4C4C8]" />
+                  </div>
+                  <span>Espacio relajante concebido para eliminar el estrés dental</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-full bg-white/15 border border-white/20 flex items-center justify-center shrink-0">
+                    <Sparkles className="w-4 h-4 text-[#A4C4C8]" />
+                  </div>
+                  <span>Equipamiento de última generación y máxima higiene</span>
+                </div>
+              </div>
+
               <div className="mt-8">
-                <Button href="/contacto" variant="primary" size="lg">
-                  DESCUBRE EL ESPACIO
-                </Button>
+                <Link
+                  href="/contacto"
+                  className="inline-flex items-center justify-center gap-2 bg-[#A4C4C8] hover:bg-[#8eb6bb] text-zinc-950 font-semibold px-8 py-3.5 text-base rounded-xl shadow-md transition-all hover:shadow-lg cursor-pointer"
+                >
+                  <span>DESCUBRE EL ESPACIO</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Block 5: CTA Band */}
-      <section className="bg-white border-t border-line py-16 lg:py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
-            PIDE TU CITA
-          </h2>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Button href="/contacto" variant="primary" size="lg">
-              CONTACTA
-            </Button>
-            <Button
-              href={`mailto:${tokens.contact.email}`}
-              variant="outline"
-              size="lg"
-            >
-              {tokens.contact.email}
-            </Button>
-            <Button
-              href={`tel:${tokens.contact.phoneTel}`}
-              variant="outline"
-              size="lg"
-            >
-              {tokens.contact.phone}
-            </Button>
-          </div>
-        </div>
-      </section>
-    </>
+      {/* 5. Contact CTA */}
+      <ContactCTA />
+    </div>
   );
 }
