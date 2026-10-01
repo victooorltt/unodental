@@ -9,6 +9,7 @@ export interface PageHeroProps {
   description?: React.ReactNode;
   imageSrc: string;
   imageAlt: string;
+  variant?: "full" | "split";
   primaryCta?: {
     label: string;
     href: string;
@@ -19,7 +20,7 @@ export interface PageHeroProps {
   };
   showCredentials?: boolean;
   align?: "center" | "left";
-  overlayOpacity?: "default" | "high" | "left-gradient";
+  overlayOpacity?: "default" | "high" | "none";
   minHeight?: string;
   imagePosition?: string;
   children?: React.ReactNode;
@@ -32,6 +33,7 @@ export function PageHero({
   description,
   imageSrc,
   imageAlt,
+  variant = "full",
   primaryCta,
   secondaryCta,
   showCredentials = false,
@@ -43,8 +45,72 @@ export function PageHero({
   className,
 }: PageHeroProps) {
   const heroDescription = subtitle || description;
-  const isLeft = align === "left";
+  const isSplit = variant === "split";
+  const isLeft = align === "left" || isSplit;
 
+  // Split layout: Text on the left, photo on the right with NO opacity overlay
+  if (isSplit) {
+    return (
+      <section
+        className={cn(
+          "relative bg-white border-b border-zinc-200/80 overflow-hidden",
+          className
+        )}
+      >
+        <div className="max-w-6xl mx-auto px-6 py-16 lg:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
+            {/* Left Column: Text */}
+            <div className="flex flex-col justify-center text-left">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-950 leading-[1.14]">
+                {title}
+              </h1>
+
+              {heroDescription && (
+                <div className="mt-5 text-lg sm:text-xl text-zinc-700 leading-relaxed font-normal max-w-xl">
+                  {typeof heroDescription === "string" ? (
+                    <p>{heroDescription}</p>
+                  ) : (
+                    heroDescription
+                  )}
+                </div>
+              )}
+
+              {(primaryCta || secondaryCta || children) && (
+                <div className="mt-8 flex flex-wrap items-center justify-start gap-4">
+                  {primaryCta && (
+                    <Button href={primaryCta.href} variant="primary" size="lg">
+                      {primaryCta.label}
+                    </Button>
+                  )}
+                  {secondaryCta && (
+                    <Button href={secondaryCta.href} variant="outline" size="lg">
+                      {secondaryCta.label}
+                    </Button>
+                  )}
+                  {children}
+                </div>
+              )}
+            </div>
+
+            {/* Right Column: Photo (Sin opacidad, 100% nítida y pura) */}
+            <div className="w-full">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-zinc-100 border border-zinc-200/90 shadow-xl">
+                <img
+                  src={imageSrc}
+                  alt={imageAlt}
+                  className={cn("h-full w-full object-cover", imagePosition)}
+                  fetchPriority="high"
+                  loading="eager"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Full-width photographic layout with intermediate opacity overlay
   return (
     <section
       className={cn(
@@ -54,7 +120,7 @@ export function PageHero({
         className
       )}
     >
-      {/* Full-width background photo across the entire hero */}
+      {/* Full-width background photo */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <img
           src={imageSrc}
@@ -64,22 +130,13 @@ export function PageHero({
           loading="eager"
         />
 
-        {/* Dynamic translucent overlay based on opacity requirements */}
-        {overlayOpacity === "high" ? (
-          // Bastante opacidad para máxima legibilidad (Nosotros)
-          <>
-            <div className="absolute inset-0 bg-white/92" />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95" />
-          </>
-        ) : overlayOpacity === "left-gradient" || isLeft ? (
-          // Degradado hacia la derecha para texto a la izquierda (Tratamientos)
-          <>
-            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/92 to-white/35" />
-            <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent" />
-          </>
+        {/* Overlay con opacidad intermedia equilibrada */}
+        {overlayOpacity === "none" ? null : overlayOpacity === "high" ? (
+          // Opacidad intermedia para Nosotros (suficiente para leer sin apagar la foto)
+          <div className="absolute inset-0 bg-gradient-to-b from-white/84 via-white/74 to-white/80" />
         ) : (
-          // Opacidad equilibrada para Inicio y Contacto
-          <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/84 to-white/88" />
+          // Opacidad intermedia estándar para Inicio y Contacto
+          <div className="absolute inset-0 bg-gradient-to-b from-white/76 via-white/64 to-white/72" />
         )}
       </div>
 

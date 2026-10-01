@@ -147,7 +147,7 @@ export default function TratamientosPage() {
         imageSrc="/images/hero-tratamientos.webp"
         imageAlt="Tratamientos y servicios Uno Dental"
         imagePosition="object-center"
-        align="left"
+        variant="split"
         showCredentials={false}
         primaryCta={{
           label: "PIDE CITA",
