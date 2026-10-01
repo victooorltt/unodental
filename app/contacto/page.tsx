@@ -75,7 +75,7 @@ export default function ContactoPage() {
           label: "ENVIAR EMAIL",
           href: `mailto:${tokens.contact.email}`,
         }}
-        showCredentials={true}
+        showCredentials={false}
       />
 
       {/* 2. Sección principal de 2 columnas */}

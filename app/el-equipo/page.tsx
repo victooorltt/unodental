@@ -111,6 +111,8 @@ export default function ElEquipoPage() {
         imageSrc="/images/el-equipo.webp"
         imageAlt="Equipo completo de Uno Dental en Valladolid"
         imagePosition="object-[center_35%]"
+        overlayOpacity="high"
+        showCredentials={false}
         primaryCta={{
           label: "PIDE TU CITA",
           href: "/contacto",
@@ -119,7 +121,6 @@ export default function ElEquipoPage() {
           label: "CONTACTA",
           href: `tel:${tokens.contact.phoneTel}`,
         }}
-        showCredentials={true}
       />
 
       {/* 2. Narrative / Vision (Deep Petrol Contrast Section, inspired by Bostak) */}

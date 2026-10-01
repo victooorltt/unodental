@@ -147,6 +147,8 @@ export default function TratamientosPage() {
         imageSrc="/images/hero-tratamientos.webp"
         imageAlt="Tratamientos y servicios Uno Dental"
         imagePosition="object-center"
+        align="left"
+        showCredentials={false}
         primaryCta={{
           label: "PIDE CITA",
           href: "/contacto",
@@ -155,7 +157,6 @@ export default function TratamientosPage() {
           label: "CONTACTA",
           href: `tel:${tokens.contact.phoneTel}`,
         }}
-        showCredentials={true}
       />
 
       {/* 2. Intro Section */}
