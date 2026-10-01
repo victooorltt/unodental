@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+  --accent: #A4C4C8;
+  --accent-hover: #8eb6bb;
+  --accent-light: #EBF3F4;
+  --accent-dark: #6F979C;
+  --surface: #FAFAFA;
+  --surface-subtle: #F5F7F7;
+  --line: #E5E7EB;
+  --muted: #666666;
+}
+
+* {
+  border-color: #E5E7EB;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #ffffff;
+  color: #111111;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+::selection {
+  background-color: #EBF3F4;
+  color: #111111;
+}
