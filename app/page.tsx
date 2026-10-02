@@ -13,7 +13,6 @@ import {
   ArrowRight,
   Sparkles,
   ShieldCheck,
-  HeartHandshake,
 } from "lucide-react";
 
 interface TreatmentItem {
@@ -289,37 +288,28 @@ export default function HomePage() {
       {/* 3. El Equipo — Somos UNO DENTAL (Soft Tinted Section) */}
       <section className="bg-[#F0F6F7] border-y border-[#D6E6E8] py-16 lg:py-24">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
-            <div className="flex flex-col justify-center">
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#235055] bg-white border border-[#D6E6E8] px-3 py-1 rounded-full inline-block w-fit mb-4">
-                El Equipo
-              </span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-14">
+            <div className="lg:col-span-5 flex flex-col justify-center">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-950 leading-[1.15]">
                 Somos UNO DENTAL
               </h2>
-              <p className="mt-4 sm:mt-6 text-base sm:text-lg text-zinc-700 leading-relaxed max-w-xl">
+              <p className="mt-4 sm:mt-5 text-base sm:text-lg font-semibold text-zinc-900 leading-snug">
                 Experiencia y atención humana para que te sientas en las mejores manos
               </p>
 
-              <div className="mt-6 space-y-3 text-sm text-zinc-700">
-                <div className="flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-full bg-white border border-[#D6E6E8] flex items-center justify-center shrink-0">
-                    <Sparkles className="w-4 h-4 text-[#235055]" />
-                  </div>
-                  <span>16 años de trayectoria profesional en Valladolid</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-full bg-white border border-[#D6E6E8] flex items-center justify-center shrink-0">
-                    <HeartHandshake className="w-4 h-4 text-[#235055]" />
-                  </div>
-                  <span>Trato cercano y personalizado en cada consulta</span>
-                </div>
+              <div className="mt-4 space-y-3 text-sm sm:text-base text-zinc-700 leading-relaxed font-normal">
+                <p>
+                  En UNO DENTAL, el equipo comparte un mismo compromiso: ofrecer atención cercana, profesional y personalizada, poniendo siempre tu bienestar en el centro de cada tratamiento.
+                </p>
+                <p>
+                  Con 16 años de experiencia en Valladolid, apostamos por la excelencia, la tecnología avanzada y un trato humano y cercano para cuidar de tu sonrisa.
+                </p>
               </div>
 
               <div className="mt-8">
                 <Link
                   href="/el-equipo"
-                  className="inline-flex items-center justify-center gap-2 bg-[#1E3639] hover:bg-[#152729] text-white font-semibold px-8 py-3.5 text-base rounded-xl shadow-sm transition-all hover:shadow-md cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#1E3639] hover:bg-[#152729] text-white font-medium px-8 py-3.5 text-base rounded-xl shadow-sm transition-all hover:shadow-md cursor-pointer"
                 >
                   <span>CONÓCENOS</span>
                   <ArrowRight className="w-4 h-4" />
@@ -327,11 +317,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="w-full">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-white border border-white/60 shadow-xl">
+            <div className="lg:col-span-7 w-full">
+              <div
+                className="relative overflow-hidden rounded-2xl bg-white border border-zinc-200/80 shadow-xl"
+                style={{ aspectRatio: "1950 / 970" }}
+              >
                 <img
                   src="/images/el-equipo.webp"
-                  alt="Equipo de profesionales Uno Dental"
+                  alt="Equipo completo de profesionales Uno Dental"
                   className="h-full w-full object-cover"
                   loading="lazy"
                 />
