@@ -169,9 +169,6 @@ export default function HomePage() {
           {/* Header with Title, Subtitle, Description and Carousel Navigation */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div className="max-w-2xl">
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#235055] bg-[#EBF3F4] px-3 py-1 rounded-full inline-block mb-3">
-                Especialidades
-              </span>
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950">
                 Tratamientos y Servicios
               </h2>
@@ -230,7 +227,7 @@ export default function HomePage() {
                       <img
                         src={treatment.image}
                         alt={treatment.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                       />
                     </div>
@@ -325,7 +322,7 @@ export default function HomePage() {
                 <img
                   src="/images/el-equipo.webp"
                   alt="Equipo completo de profesionales Uno Dental"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover object-center"
                   loading="lazy"
                 />
               </div>
@@ -343,16 +340,13 @@ export default function HomePage() {
                 <img
                   src="/images/consulta-clinica.webp"
                   alt="Instalaciones Uno Dental"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover object-center"
                   loading="lazy"
                 />
               </div>
             </div>
 
             <div className="order-1 lg:order-2 flex flex-col justify-center">
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#A4C4C8] bg-white/10 border border-white/20 px-3 py-1 rounded-full inline-block w-fit mb-4">
-                La Clínica
-              </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
                 Tu bienestar empieza desde que entras
               </h2>

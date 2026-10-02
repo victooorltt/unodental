@@ -19,7 +19,7 @@ export interface PageHeroProps {
   };
   showCredentials?: boolean;
   align?: "center" | "left";
-  overlayOpacity?: "default" | "high" | "none" | number;
+  overlayOpacity?: "default" | "high" | "none" | "mobile-only" | number;
   minHeight?: string;
   imagePosition?: string;
   children?: React.ReactNode;
@@ -48,13 +48,16 @@ export function PageHero({
   // Determinar la opacidad del overlay blanco:
   // - "high" (Nosotros): 0.70 para que la foto del equipo se aprecie más pero el texto siga nítido
   // - "default" (Inicio y Contacto): 0.58 para que la foto se vea un poco más (un poco solo)
-  // - "none" (Tratamientos): sin overlay (la foto queda al 100% natural)
+  // - "mobile-only" (Tratamientos): opacidad 0.58 solo en móvil (< lg), sin overlay en desktop
+  // - "none": sin overlay
   let overlayColor: string | null = null;
+  const isMobileOnly = overlayOpacity === "mobile-only";
+
   if (typeof overlayOpacity === "number") {
     overlayColor = `rgba(255, 255, 255, ${overlayOpacity})`;
   } else if (overlayOpacity === "high") {
     overlayColor = "rgba(255, 255, 255, 0.70)";
-  } else if (overlayOpacity === "default") {
+  } else if (overlayOpacity === "default" || overlayOpacity === "mobile-only") {
     overlayColor = "rgba(255, 255, 255, 0.58)";
   }
 
@@ -80,7 +83,7 @@ export function PageHero({
         {/* Overlay de opacidad según los ajustes solicitados */}
         {overlayColor && (
           <div
-            className="absolute inset-0"
+            className={cn("absolute inset-0", isMobileOnly && "lg:hidden")}
             style={{ backgroundColor: overlayColor }}
           />
         )}
@@ -116,17 +119,17 @@ export function PageHero({
           {(primaryCta || secondaryCta || children) && (
             <div
               className={cn(
-                "mt-8 flex flex-wrap items-center gap-4",
+                "mt-8 flex flex-col sm:flex-row flex-wrap items-center gap-4",
                 isLeft ? "justify-start" : "justify-center"
               )}
             >
               {primaryCta && (
-                <Button href={primaryCta.href} variant="primary" size="lg">
+                <Button href={primaryCta.href} variant="primary" size="lg" className="w-full sm:w-auto">
                   {primaryCta.label}
                 </Button>
               )}
               {secondaryCta && (
-                <Button href={secondaryCta.href} variant="outline" size="lg">
+                <Button href={secondaryCta.href} variant="outline" size="lg" className="w-full sm:w-auto">
                   {secondaryCta.label}
                 </Button>
               )}
@@ -135,27 +138,54 @@ export function PageHero({
           )}
         </div>
 
-        {/* Credentials row beneath buttons — SOLO en Inicio y en UNA SOLA LÍNEA (sin salto) */}
+        {/* Credentials row beneath buttons — SOLO en Inicio */}
         {showCredentials && (
-          <div className="mt-12 pt-6 border-t border-zinc-300/60 max-w-4xl mx-auto overflow-hidden">
-            <div className="flex flex-nowrap items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 text-[11px] sm:text-xs md:text-sm font-medium text-zinc-800 whitespace-nowrap overflow-x-auto no-scrollbar">
-              <div className="inline-flex items-center gap-1 sm:gap-1.5 shrink-0">
-                <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#235055] shrink-0" />
+          <div className="mt-12 pt-6 border-t border-zinc-300/60 max-w-4xl mx-auto">
+            {/* Mobile (2 lines with exactly 2 benefits per line, centered) */}
+            <div className="flex flex-col sm:hidden items-center justify-center gap-2.5 text-xs font-medium text-zinc-800">
+              <div className="flex items-center justify-center gap-2">
+                <div className="inline-flex items-center gap-1.5 shrink-0">
+                  <Sparkles className="h-3.5 w-3.5 text-[#235055] shrink-0" />
+                  <span>Desde 2010</span>
+                </div>
+                <span className="text-zinc-300 shrink-0 font-normal">·</span>
+                <div className="inline-flex items-center gap-1.5 shrink-0">
+                  <ShieldCheck className="h-3.5 w-3.5 text-[#235055] shrink-0" />
+                  <span>Última tecnología dental</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <div className="inline-flex items-center gap-1.5 shrink-0">
+                  <MapPin className="h-3.5 w-3.5 text-[#235055] shrink-0" />
+                  <span>Valladolid centro</span>
+                </div>
+                <span className="text-zinc-300 shrink-0 font-normal">·</span>
+                <div className="inline-flex items-center gap-1.5 shrink-0">
+                  <Users className="h-3.5 w-3.5 text-[#235055] shrink-0" />
+                  <span>Odontólogos expertos</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop / Tablet (Single line unbroken) */}
+            <div className="hidden sm:flex flex-nowrap items-center justify-center gap-4 md:gap-6 lg:gap-8 text-xs md:text-sm font-medium text-zinc-800 whitespace-nowrap">
+              <div className="inline-flex items-center gap-1.5 shrink-0">
+                <Sparkles className="h-4 w-4 text-[#235055] shrink-0" />
                 <span>Desde 2010</span>
               </div>
               <span className="text-zinc-300 shrink-0 font-normal">·</span>
-              <div className="inline-flex items-center gap-1 sm:gap-1.5 shrink-0">
-                <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#235055] shrink-0" />
+              <div className="inline-flex items-center gap-1.5 shrink-0">
+                <ShieldCheck className="h-4 w-4 text-[#235055] shrink-0" />
                 <span>Última tecnología dental</span>
               </div>
               <span className="text-zinc-300 shrink-0 font-normal">·</span>
-              <div className="inline-flex items-center gap-1 sm:gap-1.5 shrink-0">
-                <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#235055] shrink-0" />
+              <div className="inline-flex items-center gap-1.5 shrink-0">
+                <MapPin className="h-4 w-4 text-[#235055] shrink-0" />
                 <span>Valladolid centro</span>
               </div>
               <span className="text-zinc-300 shrink-0 font-normal">·</span>
-              <div className="inline-flex items-center gap-1 sm:gap-1.5 shrink-0">
-                <Users className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#235055] shrink-0" />
+              <div className="inline-flex items-center gap-1.5 shrink-0">
+                <Users className="h-4 w-4 text-[#235055] shrink-0" />
                 <span>Odontólogos expertos</span>
               </div>
             </div>

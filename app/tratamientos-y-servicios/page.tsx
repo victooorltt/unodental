@@ -148,7 +148,7 @@ export default function TratamientosPage() {
         imageAlt="Tratamientos y servicios Uno Dental"
         imagePosition="object-center"
         align="left"
-        overlayOpacity="none"
+        overlayOpacity="mobile-only"
         showCredentials={false}
         primaryCta={{
           label: "PIDE CITA",
@@ -193,7 +193,7 @@ export default function TratamientosPage() {
                     <div className="mt-8 pt-6 border-t border-zinc-200/80 flex items-center gap-4">
                       <Link
                         href="/contacto"
-                        className="inline-flex items-center gap-2 bg-[#1E3639] hover:bg-[#152729] text-white text-sm font-semibold px-6 py-3 rounded-xl shadow-xs transition-all hover:shadow-md cursor-pointer"
+                        className="inline-flex items-center justify-center gap-2 bg-[#1E3639] hover:bg-[#152729] text-white text-sm font-semibold px-6 py-3 rounded-xl shadow-xs transition-all hover:shadow-md cursor-pointer w-full sm:w-auto"
                       >
                         <span>Pedir cita para {treatment.title.toLowerCase()}</span>
                         <ArrowRight className="w-4 h-4" />
@@ -207,7 +207,7 @@ export default function TratamientosPage() {
                       <img
                         src={treatment.image}
                         alt={treatment.alt}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                       />
                     </div>

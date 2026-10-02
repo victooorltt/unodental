@@ -107,9 +107,6 @@ export default function ContactoPage() {
                 </div>
               ) : (
                 <div className="bg-white rounded-2xl border border-zinc-200/90 p-8 sm:p-10 shadow-sm">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#235055] bg-[#EBF3F4] px-3 py-1 rounded-full inline-block mb-3">
-                    Cita Previa
-                  </span>
                   <h2 className="text-2xl sm:text-3xl font-bold text-zinc-950 tracking-tight mb-2">
                     Formulario de contacto
                   </h2>
@@ -290,9 +287,6 @@ export default function ContactoPage() {
             <div className="lg:col-span-5 space-y-8">
               {/* Tarjeta de datos de contacto */}
               <div className="bg-white rounded-2xl border border-zinc-200/90 p-8 shadow-sm space-y-6">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#235055] bg-[#EBF3F4] px-3 py-1 rounded-full inline-block">
-                  Atención Directa
-                </span>
                 <h2 className="text-2xl font-bold text-zinc-950 tracking-tight">
                   Atención en clínica
                 </h2>
@@ -381,9 +375,6 @@ export default function ContactoPage() {
               {/* Mapa embebido */}
               <div className="bg-white rounded-2xl border border-zinc-200/90 p-6 shadow-sm">
                 <div className="mb-4">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#235055] bg-[#EBF3F4] px-3 py-1 rounded-full inline-block mb-2">
-                    Ubicación
-                  </span>
                   <h3 className="text-lg font-bold text-zinc-900">
                     Dónde encontrarnos
                   </h3>
