@@ -13,21 +13,21 @@ export interface ButtonProps
 
 const variantStyles: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary:
-    "bg-[#A4C4C8] text-zinc-950 font-semibold hover:bg-[#8eb6bb] active:bg-[#7fa7ac] shadow-sm hover:shadow-md transition-all",
+    "bg-[#1E3639] hover:bg-[#152729] text-white font-medium shadow-sm hover:shadow-md transition-all active:scale-[0.99]",
   secondary:
-    "bg-[#EBF3F4] text-[#1E3639] border border-[#C8DFE2] font-semibold hover:bg-[#DDECEE] transition-colors",
+    "bg-[#EBF3F4] text-[#1E3639] border border-[#C8DFE2] font-medium hover:bg-[#DDECEE] transition-colors",
   outline:
-    "bg-white/95 text-zinc-900 border border-zinc-200 hover:border-zinc-300 hover:bg-white font-medium shadow-xs transition-all",
+    "bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-300 hover:border-zinc-400 font-medium shadow-xs transition-all active:scale-[0.99]",
   ghost:
     "bg-transparent text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 transition-colors font-medium",
   dark:
-    "bg-[#1E3639] text-white font-semibold hover:bg-[#152729] active:bg-zinc-950 shadow-sm hover:shadow-md transition-all",
+    "bg-[#1E3639] text-white font-medium hover:bg-[#152729] active:bg-zinc-950 shadow-sm hover:shadow-md transition-all",
 };
 
 const sizeStyles: Record<NonNullable<ButtonProps["size"]>, string> = {
   sm: "text-xs px-3.5 py-1.5 rounded-lg gap-1.5",
   md: "text-sm px-5 py-2.5 rounded-xl gap-2",
-  lg: "text-base px-7 py-3.5 rounded-xl gap-2.5",
+  lg: "text-sm sm:text-base px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl gap-2.5",
 };
 
 export const Button = React.forwardRef<

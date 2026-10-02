@@ -145,8 +145,8 @@ export default function HomePage() {
       <PageHero
         title={
           <>
-            Desde 2010{" "}
-            <span className="text-[#235055]">en boca de todos</span>
+            Desde 2010 en<br />
+            <span className="text-[#235055]">boca de todos</span>
           </>
         }
         subtitle="Disfruta de la última tecnología dental en manos de odontólogos expertos"

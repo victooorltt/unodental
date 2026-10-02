@@ -160,22 +160,7 @@ export default function TratamientosPage() {
         }}
       />
 
-      {/* 2. Intro Section */}
-      <section className="bg-white py-16 lg:py-20 border-b border-zinc-200/80">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-950">
-            TRATAMIENTOS Y SERVICIOS
-          </h2>
-          <p className="mt-4 text-xl sm:text-2xl font-semibold text-zinc-800">
-            Todo lo que ofrecemos para tu salud bucal
-          </p>
-          <p className="mt-3 text-base sm:text-lg text-zinc-600 leading-relaxed max-w-2xl mx-auto">
-            Cada tratamiento está diseñado para brindarte comodidad, confianza y bienestar
-          </p>
-        </div>
-      </section>
-
-      {/* 3. Alternating Treatments List (with alternating backgrounds for rhythm) */}
+      {/* 2. Alternating Treatments List (with alternating backgrounds for rhythm) */}
       <div>
         {treatments.map((treatment, index) => {
           const isEven = index % 2 === 0;
