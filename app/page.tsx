@@ -290,7 +290,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-14">
             <div className="lg:col-span-5 flex flex-col justify-center">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-950 leading-[1.15]">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-950 whitespace-nowrap leading-tight">
                 Somos UNO DENTAL
               </h2>
               <p className="mt-4 sm:mt-5 text-base sm:text-lg font-semibold text-zinc-900 leading-snug">
